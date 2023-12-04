@@ -4,14 +4,17 @@ import be.strykers.utils.FileReader.BufferedReader;
 import be.strykers.utils.FileReader.FileReader;
 import be.strykers.utils.FileReader.Number;
 import org.javatuples.Pair;
-import org.javatuples.Quartet;
 
-import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class solver {
+public class Solver {
+    private static final Logger LOGGER = Logger.getLogger(Solver.class.getName());
     private final static String FILE_PATH = "src/main/java/be/strykers/jour1/puzzleInput";
 
     public static void main(String[] args) {
@@ -19,23 +22,20 @@ public class solver {
         Pattern firstDigitFoundPattern = Pattern.compile("[0-9]");
         Pattern lastDigitFoundPattern = Pattern.compile("(\\d)(?!.*\\d)");
 
-        try {
-            FileReader reader = new BufferedReader(FILE_PATH);
+        try (FileReader reader = new BufferedReader(FILE_PATH)) {
 
-            while (!reader.endOfFile()) {
+            while (!reader.hasNextLine()) {
                 String line = reader.readLine();
 
                 List<Pair<Integer, Integer>> occurences = new ArrayList<>();
+
+                Matcher firstDigitMatcher = firstDigitFoundPattern.matcher(line);
+                Matcher lastDigitMatcher = lastDigitFoundPattern.matcher(line);
 
                 Pair<Integer, Integer> firstNumberOccurence = findFirstOccurence(line);
                 if (firstNumberOccurence.getValue1() != null) occurences.add(firstNumberOccurence);
                 Pair<Integer, Integer> lastNumberOccurence = findLastOccurence(line);
                 if (lastNumberOccurence.getValue1() != null) occurences.add(lastNumberOccurence);
-
-                System.out.println(line);
-
-                Matcher firstDigitMatcher = firstDigitFoundPattern.matcher(line);
-                Matcher lastDigitMatcher = lastDigitFoundPattern.matcher(line);
 
                 if (firstDigitMatcher.find()) {
                     occurences.add(new Pair<>(firstDigitMatcher.start(), Integer.parseInt(firstDigitMatcher.group())));
@@ -55,12 +55,13 @@ public class solver {
             }
 
             System.out.println("\nLa somme totale est " + sum);
-            
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+        } catch (Exception e) {
+            LOGGER.severe(e.getMessage());
         }
 
     }
+
     public static Pair<Integer, Integer> findFirstOccurence(String line) {
         Pair<Integer, Integer> firstOccurence = new Pair<>(line.length(), null);
 

@@ -1,6 +1,7 @@
 package be.strykers.utils.FileReader;
 
-public interface FileReader {
+public interface FileReader extends AutoCloseable {
     String readLine();
-    boolean endOfFile();
+
+    boolean hasNextLine();
 }
