@@ -47,13 +47,7 @@ public class Solver {
 
                     long source = Long.parseLong(lineParts[0]);
                     long destination = Long.parseLong(lineParts[1]);
-                    long range;
-
-                    if (lineParts.length == 3) {
-                        range = Long.parseLong(lineParts[2]);
-                    } else {
-                        range = 0;
-                    }
+                    long range = Long.parseLong(lineParts[2]);
 
                     mapperBuilder.addMapEntity(source, destination, range);
 
