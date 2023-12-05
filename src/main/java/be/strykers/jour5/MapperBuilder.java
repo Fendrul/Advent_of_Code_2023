@@ -18,9 +18,8 @@ public class MapperBuilder {
         return this;
     }
 
-    public MapperBuilder addMapComponent(long source, long destination, long range) {
+    public void addMapComponent(long source, long destination, long range) {
         mapper.addMapEntity(new MapComponent(source, destination, range));
-        return this;
     }
 
     public void build() {

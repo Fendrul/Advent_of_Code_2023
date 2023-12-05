@@ -7,10 +7,12 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class MapperManager {
-    Set<Pair<Long, Long>> seeds;
+    Set<Long> seeds;
+    Set<Pair<Long, Long>> seedsRanged;
     LinkedList<Mapper> mappers;
 
-    public MapperManager(Set<Pair<Long, Long>> seeds) {
+    public MapperManager(Set<Long> seeds, Set<Pair<Long, Long>> seedsRanged) {
+        this.seedsRanged = seedsRanged;
         this.seeds = seeds;
         mappers = new LinkedList<>();
     }
@@ -20,12 +22,7 @@ public class MapperManager {
     }
 
     public Long getLowestValue() {
-        Set<Long> values = new HashSet<>();
-
-        for (Pair<Long, Long> seed : seeds) {
-            values.add(seed.getValue0());
-            values.add(seed.getValue1());
-        }
+        Set<Long> values = new HashSet<>(seeds);
 
         for (Mapper mapper : mappers) {
             values = mapper.convert(values);
@@ -35,18 +32,18 @@ public class MapperManager {
     }
 
     public long getLowestValueFromRange() {
-        Set<Pair<Long, Long>> values = new HashSet<>(seeds);
+        Set<Pair<Long, Long>> values = new HashSet<>(seedsRanged);
+        int count = 0;
 
         for (Mapper mapper : mappers) {
+            System.out.println("Mapper " + count++ + " : ");
             values = mapper.convertFromRange(values);
         }
 
-        Set<Long> flatValues = new HashSet<>();
-        for (Pair<Long, Long> value : values) {
-            flatValues.add(value.getValue0());
-            flatValues.add(value.getValue1());
-        }
+        values.forEach(System.out::println);
 
-        return flatValues.stream().min(Long::compareTo).get();
+        return values.stream()
+                .mapToLong(Pair::getValue0)
+                .min().getAsLong();
     }
 }

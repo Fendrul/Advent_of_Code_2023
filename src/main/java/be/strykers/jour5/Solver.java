@@ -17,25 +17,25 @@ public class Solver {
 
         Pattern findNumberPattern = Pattern.compile("\\d+");
 
-        try (FileReader fileReader = new BufferedReader("src/main/java/be/strykers/jour5/input")) {
+        try (FileReader fileReader = new BufferedReader("src/main/java/be/strykers/jour5/test")) {
             String firstLine = fileReader.readLine();
             Matcher findNumberMatcher = findNumberPattern.matcher(firstLine);
-            Set<Pair<Long, Long>> seeds = new HashSet<>();
-            List<Long> seedsTemp = new ArrayList<>();
+            Set<Pair<Long, Long>> seedsRanged = new HashSet<>();
+            List<Long> seeds = new ArrayList<>();
 
             firstLine = firstLine.substring(firstLine.indexOf(":") + 2);
             Arrays.stream(firstLine.split(" "))
                     .map(Long::parseLong)
-                    .forEach(seedsTemp::add);
+                    .forEach(seeds::add);
 
-            for (int i = 0; i < seedsTemp.size() / 2; i++) {
-                long firstValue = seedsTemp.get(i * 2);
-                long secondValue = firstValue + seedsTemp.get(i * 2 + 1);
+            for (int i = 0; i < seeds.size() / 2; i++) {
+                long firstValue = seeds.get(i * 2);
+                long secondValue = firstValue + seeds.get(i * 2 + 1);
 
-                seeds.add(new Pair<>(firstValue, secondValue));
+                seedsRanged.add(new Pair<>(firstValue, secondValue));
             }
 
-            MapperManager mapperManager = new MapperManager(seeds);
+            MapperManager mapperManager = new MapperManager(new HashSet<>(seeds), seedsRanged);
             MapperBuilder mapperBuilder = new MapperBuilder(mapperManager);
 
             while (fileReader.hasNextLine()) {
@@ -58,7 +58,7 @@ public class Solver {
                 }
             }
             System.out.println("la valeur la plus basse est : " + mapperManager.getLowestValue());
-            System.out.println("La valeur la plus basse avec les portées de seed est :" + mapperManager.getLowestValueFromRange());
+            System.out.println("La valeur la plus basse avec les portées de seed est : " + mapperManager.getLowestValueFromRange());
 
             System.out.println("\nTemps d'exécution : " + (System.currentTimeMillis() - startTime) + "ms");
 

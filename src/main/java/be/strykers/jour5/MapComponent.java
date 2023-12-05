@@ -21,6 +21,8 @@ public class MapComponent {
     }
 
     public Pair<Long, Long> getConversionFromRange(PairWrapper<Long, Long> toConvertWrapped) {
+//        System.out.println("Converting " + toConvertWrapped.getPair() + " to source " + source + ", destination " + destination + ", range " + range);
+
         Pair<Long, Long> toConvert = toConvertWrapped.getPair();
 
         if (!contains(toConvert))

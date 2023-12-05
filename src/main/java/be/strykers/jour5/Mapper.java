@@ -53,15 +53,17 @@ public class Mapper {
 
                 if (mapEntity.contains(toConvert)) {
                     PairWrapper<Long, Long> toConvertWrapped = new PairWrapper<>(toConvert);
-                    Pair<Long, Long> valuesFromMapEntity = mapEntity.getConversionFromRange(toConvertWrapped);
-                    toConvert = toConvertWrapped.getPair();
-                    convertedValues.add(valuesFromMapEntity);
 
-//                    System.out.println("Converted into : " + valuesFromMapEntity);
+                    Pair<Long, Long> conversionFromRange = mapEntity.getConversionFromRange(toConvertWrapped);
+                    System.out.println("Converting " + toConvert + " to " + conversionFromRange + "\n");
+                    toConvert = toConvertWrapped.getPair();
+                    convertedValues.add(conversionFromRange);
+
                 }
             }
 
             if (toConvert.getValue0() != 0L && toConvert.getValue1() != 0L) {
+                System.out.println("Adding " + toConvert + "\n");
                 convertedValues.add(toConvert);
             }
         }
