@@ -2,9 +2,6 @@ package be.strykers.jour5;
 
 import org.javatuples.Pair;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class MapComponent {
     private final long source;
     private final long destination;
@@ -32,8 +29,6 @@ public class MapComponent {
     public Pair<Long, Long> getConversionFromRange(PairWrapper<Long, Long> toConvertWrapped) {
         Pair <Long, Long> toConvert = toConvertWrapped.getPair();
 
-//        System.out.println("source " + source + ", destination " + destination + ", range " + range + " & toConvert : " + toConvert);
-
         if (!contains(toConvert))
             throw new IllegalArgumentException("Conversion not possible");
 
@@ -53,8 +48,7 @@ public class MapComponent {
             toConvertWrapped.setPair(
                     new Pair<>(0L, 0L)
             );
-            Pair<Long, Long> rangeToReturn = new Pair<>(getConversion(toConvert.getValue0()), getConversion(toConvert.getValue1()));
-            return rangeToReturn;
+            return new Pair<>(getConversion(toConvert.getValue0()), getConversion(toConvert.getValue1()));
         }
     }
 
@@ -63,7 +57,6 @@ public class MapComponent {
     }
 
     public boolean contains(Pair<Long, Long> toConvert) {
-//        System.out.println("vérification de la convertion : " + toConvert + " avec les valeurs : " + this.destination + " et " + this.range);
         return containsInRange(toConvert.getValue0()) || containsInRange(toConvert.getValue1());
     }
 }

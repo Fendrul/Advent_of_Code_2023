@@ -4,7 +4,6 @@ import be.strykers.utils.FileReader.BufferedReader;
 import be.strykers.utils.FileReader.FileReader;
 import org.javatuples.Pair;
 
-import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -19,7 +18,6 @@ public class Solver {
         Pattern findNumberPattern = Pattern.compile("\\d+");
 
         try (FileReader fileReader = new BufferedReader("src/main/java/be/strykers/jour5/input")) {
-            int lineCount = 1;
             String firstLine = fileReader.readLine();
             Matcher findNumberMatcher = findNumberPattern.matcher(firstLine);
             Set<Pair<Long, Long>> seeds = new HashSet<>();
@@ -41,7 +39,6 @@ public class Solver {
             MapperBuilder mapperBuilder = new MapperBuilder(mapperManager);
 
             while (fileReader.hasNextLine()) {
-                lineCount++;
                 String line = fileReader.readLine();
                 findNumberMatcher = findNumberPattern.matcher(line);
 
@@ -71,8 +68,6 @@ public class Solver {
 
             System.out.println("\nTemps d'exécution : " + (System.currentTimeMillis() - startTime) + "ms");
 
-        } catch (FileNotFoundException e) {
-            LOGGER.severe(e.getMessage());
         } catch (Exception e) {
             LOGGER.severe(e.getMessage());
         }
