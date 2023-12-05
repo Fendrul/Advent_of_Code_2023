@@ -1,0 +1,8 @@
+
+[	java:S112""FDefine and throw a dedicated exception instead of using a generic one.(µö¸
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ç¾ºÎùÿÿÿÿ
+P	java:S125"<This block of commented-out lines of code should be removed.(éõ¹#
+@	java:S1066"+Replace this use of System.out by a logger.(ÃÙ’£
+@	java:S1067"+Replace this use of System.out by a logger.(‚š˜‘
+E	java:S1068"+Replace this use of System.out by a logger.(­ºèÑÿÿÿÿÿ
