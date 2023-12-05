@@ -49,7 +49,7 @@ public class Solver {
                     long destination = Long.parseLong(lineParts[1]);
                     long range = Long.parseLong(lineParts[2]);
 
-                    mapperBuilder.addMapEntity(source, destination, range);
+                    mapperBuilder.addMapComponent(source, destination, range);
 
                 } else {
                     if (!mapperBuilder.isEmpty()) {

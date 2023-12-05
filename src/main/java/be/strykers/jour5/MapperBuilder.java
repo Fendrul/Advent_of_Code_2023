@@ -13,18 +13,13 @@ public class MapperBuilder {
         mapper = new Mapper();
     }
 
-    public MapperBuilder addMapEntity(MapComponent mapEntity) {
+    public MapperBuilder addMapComponent(MapComponent mapEntity) {
         mapper.addMapEntity(mapEntity);
         return this;
     }
 
-    public MapperBuilder addMapEntity(long source, long destination, long range) {
+    public MapperBuilder addMapComponent(long source, long destination, long range) {
         mapper.addMapEntity(new MapComponent(source, destination, range));
-        return this;
-    }
-
-    public MapperBuilder addMapEntity(int source, int destination) {
-        mapper.addMapEntity(new MapComponent(source, destination));
         return this;
     }
 

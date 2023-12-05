@@ -8,24 +8,12 @@ import java.util.Set;
 public class Mapper {
     Set<MapComponent> mapEntities;
 
-    public Mapper(Set<MapComponent> mapEntities) {
-        this.mapEntities = mapEntities;
-    }
-
     public Mapper() {
         mapEntities = new HashSet<>();
     }
 
     public void addMapEntity(MapComponent mapEntity) {
         mapEntities.add(mapEntity);
-    }
-
-    public Set<MapComponent> getMapEntities() {
-        return mapEntities;
-    }
-
-    public void setMapEntities(Set<MapComponent> mapEntities) {
-        this.mapEntities = mapEntities;
     }
 
     public boolean isEmpty() {

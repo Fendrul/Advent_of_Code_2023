@@ -13,12 +13,6 @@ public class MapComponent {
         this.range = range;
     }
 
-    public MapComponent(int source, int destination) {
-        this.source = source;
-        this.destination = destination;
-        this.range = 0;
-    }
-
     public Long getConversion(Long convert) {
         if (!(destination <= convert && convert <= destination + range))
             throw new IllegalArgumentException("Conversion not possible");
@@ -27,7 +21,7 @@ public class MapComponent {
     }
 
     public Pair<Long, Long> getConversionFromRange(PairWrapper<Long, Long> toConvertWrapped) {
-        Pair <Long, Long> toConvert = toConvertWrapped.getPair();
+        Pair<Long, Long> toConvert = toConvertWrapped.getPair();
 
         if (!contains(toConvert))
             throw new IllegalArgumentException("Conversion not possible");
