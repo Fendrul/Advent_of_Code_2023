@@ -2,22 +2,26 @@ package be.strykers.jour5;
 
 import be.strykers.utils.FileReader.BufferedReader;
 import be.strykers.utils.FileReader.FileReader;
+import be.strykers.utils.Logger.LoggerBuilder;
 import org.javatuples.Pair;
 
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Solver {
-    private static final Logger LOGGER = Logger.getLogger(Solver.class.getName());
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws URISyntaxException {
+        LoggerBuilder.setConfig("src/main/java/be/strykers/jour5/log.txt");
+        Logger LOGGER = LoggerBuilder.getLogger(Solver.class);
+
         long startTime = System.currentTimeMillis();
 
         Pattern findNumberPattern = Pattern.compile("\\d+");
 
-        try (FileReader fileReader = new BufferedReader("src/main/java/be/strykers/jour5/test")) {
+        try (FileReader fileReader = new BufferedReader("src/main/java/be/strykers/jour5/input")) {
             String firstLine = fileReader.readLine();
             Matcher findNumberMatcher = findNumberPattern.matcher(firstLine);
             Set<Pair<Long, Long>> seedsRanged = new HashSet<>();

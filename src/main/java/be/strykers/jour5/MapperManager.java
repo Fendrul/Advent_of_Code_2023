@@ -33,14 +33,10 @@ public class MapperManager {
 
     public long getLowestValueFromRange() {
         Set<Pair<Long, Long>> values = new HashSet<>(seedsRanged);
-        int count = 0;
 
         for (Mapper mapper : mappers) {
-            System.out.println("Mapper " + count++ + " : ");
             values = mapper.convertFromRange(values);
         }
-
-        values.forEach(System.out::println);
 
         return values.stream()
                 .mapToLong(Pair::getValue0)

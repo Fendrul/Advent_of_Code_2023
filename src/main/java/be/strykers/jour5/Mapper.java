@@ -55,7 +55,6 @@ public class Mapper {
                     PairWrapper<Long, Long> toConvertWrapped = new PairWrapper<>(toConvert);
 
                     Pair<Long, Long> conversionFromRange = mapEntity.getConversionFromRange(toConvertWrapped);
-                    System.out.println("Converting " + toConvert + " to " + conversionFromRange + "\n");
                     toConvert = toConvertWrapped.getPair();
                     convertedValues.add(conversionFromRange);
 
@@ -63,7 +62,6 @@ public class Mapper {
             }
 
             if (toConvert.getValue0() != 0L && toConvert.getValue1() != 0L) {
-                System.out.println("Adding " + toConvert + "\n");
                 convertedValues.add(toConvert);
             }
         }
