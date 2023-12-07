@@ -10,11 +10,11 @@ public class BufferedReader implements FileReader {
     /**
      * Creates a new FileReader that reads from the given file.
      *
-     * @param fileName The name of the file to read from.
+     * @param filePath The name of the file to read from.
      * @throws FileNotFoundException If the file does not exist.
      */
-    public BufferedReader(String fileName) throws FileNotFoundException {
-        this.reader = new java.io.BufferedReader(new java.io.FileReader(fileName));
+    public BufferedReader(String filePath) throws FileNotFoundException {
+        this.reader = new java.io.BufferedReader(new java.io.FileReader(filePath));
     }
 
     /**

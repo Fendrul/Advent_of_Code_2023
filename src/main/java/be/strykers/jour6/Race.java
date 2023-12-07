@@ -8,7 +8,15 @@ import org.javatuples.Pair;
 import java.util.logging.Logger;
 
 public class Race {
-    private static final Logger LOGGER = LoggerBuilder.getLogger(Race.class);
+    private static final Logger LOGGER;
+
+    static {
+        try {
+            LOGGER = LoggerBuilder.getLogger();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Getter
     private final double time;

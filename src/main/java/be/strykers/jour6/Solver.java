@@ -6,27 +6,30 @@ import be.strykers.utils.Logger.LoggerBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Solver {
 
-    public static void main(String[] args) {
-        LoggerBuilder.setConfig("src/main/java/be/strykers/jour6/log.txt", Level.OFF);
-        Logger LOGGER = LoggerBuilder.getLogger(Solver.class);
+    public static void main(String[] args) throws Exception {
+        LoggerBuilder.setConfig(Solver.class, "src/main/java/be/strykers/jour6/log.txt");
+        Logger LOGGER = LoggerBuilder.getLogger();
 
         long startTime = System.currentTimeMillis();
 
         RaceManager raceManager = new RaceManager();
         RaceManager raceManagerForUnifiedResult = new RaceManager();
         Pattern findNumberPattern = Pattern.compile("\\d+");
-
         List<Integer> times = new ArrayList<>();
         List<Integer> distances = new ArrayList<>();
         long unifiedTime = 0;
         long unifiedDistance = 0;
+
+        /**
+         * PARSING
+         */
+
         try (FileReader fileHandler = new BufferedReader("src/main/java/be/strykers/jour6/input")) {
             String line = fileHandler.readLine();
 
@@ -38,6 +41,7 @@ public class Solver {
             while (findNumberMatcher.find()) {
                 times.add(Integer.parseInt(findNumberMatcher.group()));
             }
+
 
             line = fileHandler.readLine();
 
@@ -70,6 +74,10 @@ public class Solver {
 
             raceManager.addRace(race);
         }
+
+        /**
+         * SOLVING
+         */
 
         System.out.println("First part : " + raceManager.getFirstPartResult());
         System.out.println("Second part : " + raceManagerForUnifiedResult.getSecondPartResult());

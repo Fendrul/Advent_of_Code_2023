@@ -1,47 +1,41 @@
 package be.strykers.utils.Logger;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LoggerBuilder {
-    static Level level;
-    private static FileHandler fileHandler;
+    private static Logger logger;
 
     private LoggerBuilder() {
     }
 
-    public static void setConfig(String logPath, Level level) {
-        LoggerBuilder.level = level;
-        setConfig(logPath);
+    public static void setConfig(Class<?> clazz, String logPath) {
+        setConfig(clazz, logPath, Level.ALL);
     }
 
-    public static void setConfig(String logPath) {
+    public static void setConfig(Class<?> clazz, String logPath, Level level) {
+
+        FileHandler fileHandler;
         try {
             fileHandler = new FileHandler(logPath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         fileHandler.setFormatter(new CustomFormatter());
-        fileHandler.setLevel(getLevel());
-    }
+        fileHandler.setLevel(level);
 
-    public static Logger getLogger(Class<?> clazz) {
-        if (fileHandler == null) throw new RuntimeException("You must set the log file path first");
+        LoggerBuilder.logger = Logger.getLogger(clazz.getName());
 
-        Logger logger = Logger.getLogger(clazz.getName());
-
-        logger.setLevel(getLevel());
+        logger.setLevel(level);
 
         logger.addHandler(fileHandler);
+    }
+
+    public static Logger getLogger() {
+        if (logger == null) throw new RuntimeException("You must set the log config first.");
 
         return logger;
     }
-
-    private static Level getLevel() {
-        return Objects.requireNonNullElse(level, Level.ALL);
-    }
-
 }

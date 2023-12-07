@@ -8,7 +8,16 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 public class RaceManager {
-    private static Logger LOGGER = LoggerBuilder.getLogger(RaceManager.class);
+    private static Logger LOGGER;
+
+    static {
+        try {
+            LOGGER = LoggerBuilder.getLogger();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     Set<Race> races;
 
     public RaceManager() {

@@ -5,7 +5,6 @@ import be.strykers.utils.FileReader.FileReader;
 import be.strykers.utils.Logger.LoggerBuilder;
 import org.javatuples.Pair;
 
-import java.net.URISyntaxException;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -13,9 +12,9 @@ import java.util.regex.Pattern;
 
 public class Solver {
 
-    public static void main(String[] args) throws URISyntaxException {
-        LoggerBuilder.setConfig("src/main/java/be/strykers/jour5/log.txt");
-        Logger LOGGER = LoggerBuilder.getLogger(Solver.class);
+    public static void main(String[] args) throws Exception {
+//        LoggerBuilder.setConfig(Solver.class, "src/main/java/be/strykers/jour5/log.txt");
+        Logger LOGGER = LoggerBuilder.getLogger();
 
         long startTime = System.currentTimeMillis();
 
