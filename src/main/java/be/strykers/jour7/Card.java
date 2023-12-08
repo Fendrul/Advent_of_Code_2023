@@ -3,7 +3,7 @@ package be.strykers.jour7;
 import lombok.Getter;
 
 @Getter
-public enum HexaCardValue {
+public enum Card {
     ONE('1', 0x1),
     TWO('2', 0x2),
     THREE('3', 0x3),
@@ -22,14 +22,14 @@ public enum HexaCardValue {
     private final char charValue;
     private final int hexaValue;
 
-    HexaCardValue(char value, int hexaValue) {
+    Card(char value, int hexaValue) {
         this.charValue = value;
         this.hexaValue = hexaValue;
     }
 
-    public static HexaCardValue getHexaCardValue(char value) {
-        for (HexaCardValue hexaCardValue : HexaCardValue.values()) {
-            if (hexaCardValue.getCharValue() == value) return hexaCardValue;
+    public static Card getHexaCardValue(char value) {
+        for (Card card : Card.values()) {
+            if (card.getCharValue() == value) return card;
         }
         throw new IllegalArgumentException("No hexaCardValue found for " + value);
     }

@@ -22,6 +22,7 @@ public class Hand implements Comparable<Hand> {
     private char bestCard;
 
     public Hand(char[] cards, int bid) {
+        if (cards == null) throw new NullPointerException("A hand must have cards");
         if (cards.length != 5) throw new IllegalArgumentException("A hand must have 5 cards");
 
         this.bid = bid;
@@ -45,8 +46,8 @@ public class Hand implements Comparable<Hand> {
         List<Integer> cardsValues = new ArrayList<>();
 
         for (int i = cards.length - 1; i >= 0; i--) {
-            HexaCardValue hexaCardValue = HexaCardValue.getHexaCardValue(cards[i]);
-            cardsValues.add(hexaCardValue.getHexaValue());
+            Card card = Card.getHexaCardValue(cards[i]);
+            cardsValues.add(card.getHexaValue());
         }
 
         for (int i = cardsValues.size() - 1; i >= 0; i--) {
@@ -56,8 +57,8 @@ public class Hand implements Comparable<Hand> {
             Integer cardValue = cardsValues.get(i);
             collapsedCardsValues += cardValue;
 
-            if (cardValue == 0xB) {
-                collapsedCardsValuesWithJ += 0x1;
+            if (cardValue == Card.J.getHexaValue()) {
+                collapsedCardsValuesWithJ += Card.ONE.getHexaValue();
             } else {
                 collapsedCardsValuesWithJ += cardValue;
             }
@@ -74,10 +75,10 @@ public class Hand implements Comparable<Hand> {
 
     private int getType(char[] cards) {
         int type;
-        int[] cardsCounts = new int[HexaCardValue.values().length];
+        int[] cardsCounts = new int[Card.values().length];
 
         for (char card : cards) {
-            HexaCardValue hexaCardValue = HexaCardValue.getHexaCardValue(card);
+            Card hexaCardValue = Card.getHexaCardValue(card);
             cardsCounts[hexaCardValue.getHexaValue() - 1]++;
         }
 
@@ -86,7 +87,7 @@ public class Hand implements Comparable<Hand> {
         for (int i = 0; i < cardsCounts.length; i++) {
             if (cardsCounts[i] > maxCount) {
                 maxCount = cardsCounts[i];
-                this.bestCard = HexaCardValue.values()[i].getCharValue();
+                this.bestCard = Card.values()[i].getCharValue();
             }
         }
 
@@ -128,8 +129,8 @@ public class Hand implements Comparable<Hand> {
         int JCount = 0;
 
         for (char card : cards) {
-            HexaCardValue hexaCardValue = HexaCardValue.getHexaCardValue(card);
-            if (hexaCardValue.getCharValue() == 'J') JCount++;
+            Card hexaCardValue = Card.getHexaCardValue(card);
+            if (hexaCardValue.getCharValue() == Card.J.getCharValue()) JCount++;
         }
 
 
@@ -205,7 +206,7 @@ public class Hand implements Comparable<Hand> {
         return "Hand{" +
                 "cards=" + cardsString +
                 ", type=" + type +
-                ", typeded" + typeWithJ +
+                ", typeWithJ" + typeWithJ +
                 ", bid=" + bid +
                 '}';
     }

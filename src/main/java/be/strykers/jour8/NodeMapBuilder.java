@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class NodeMapBuilder {
-    Map<String, Pair<String, String>> stringNodesMap;
+    private final Map<String, Pair<String, String>> stringNodesMap;
 
     public NodeMapBuilder() {
         stringNodesMap = new HashMap<>();
@@ -20,7 +20,6 @@ public class NodeMapBuilder {
 
     public NodesMapManager build(DirectionMap direction, String startingNode, String terminatingNode, String endingLetterForStartingNodes, String endingLetterForTerminatingNodes) {
         Map<String, Node> nodesMap = new HashMap<>();
-        Set<Node> nodesSet = new HashSet<>();
         Set<Node> multipleStartingNodes = new HashSet<>();
         Set<Node> multipleTerminatingNodes = new HashSet<>();
 
@@ -40,8 +39,6 @@ public class NodeMapBuilder {
                 node.setLeft(nodesMap.get(nodePair.getValue0()));
             if (nodePair.getValue1() != null)
                 node.setRight(nodesMap.get(nodePair.getValue1()));
-
-            nodesSet.add(node);
 
             if (nodeCore.endsWith(endingLetterForStartingNodes))
                 multipleStartingNodes.add(node);
