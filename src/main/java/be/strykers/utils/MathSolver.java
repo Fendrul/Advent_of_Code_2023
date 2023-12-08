@@ -10,4 +10,21 @@ public class MathSolver {
         double x2 = (-b - Math.sqrt(delta)) / (2 * a);
         return new Pair<>(x1, x2);
     }
+
+    public static Long PGCD(Long a, Long b) {
+        if (b == 0) return a;
+        return PGCD(b, a % b);
+    }
+
+    public static Long PPCM(Long a, Long b) {
+        return (a * b) / PGCD(a, b);
+    }
+
+    public static Long PPCM(Long... numbers) {
+        Long result = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            result = PPCM(result, numbers[i]);
+        }
+        return result;
+    }
 }
