@@ -46,14 +46,25 @@ public class NodesMapManager {
         return count;
     }
 
-    public Long getPathToNextEndingNode(Node startingNode) {
+    public long getSecondPartSolution() {
+        List<Long> nodesDistance = new ArrayList<>();
+
+        for (Node node : multipleStartingNodes) {
+            nodesDistance.add(getPathToNextEndingNode(node));
+        }
+
+        return MathSolver.PPCM(nodesDistance.toArray(new Long[0]));
+    }
+
+    private Long getPathToNextEndingNode(Node startingNode) {
         long count = 0;
         Cyclerator<Character> directionCyclerator = directionMap.getCyclerator();
+        long directionLength = directionMap.getSize();
 
         Node currentNode = startingNode;
 
         Character direction;
-        while (!multipleTerminatingNodes.contains(currentNode) || count == 0) {
+        while (count + 1 % directionLength != 0 && !multipleTerminatingNodes.contains(currentNode)) {
             direction = directionCyclerator.cycle();
 
             if (direction == 'L') {
@@ -68,15 +79,5 @@ public class NodesMapManager {
         }
 
         return count;
-    }
-
-    public long getSecondPartSolution() {
-        List<Long> nodesDistance = new ArrayList<>();
-
-        for (Node node : multipleStartingNodes) {
-            nodesDistance.add(getPathToNextEndingNode(node));
-        }
-
-        return MathSolver.PPCM(nodesDistance.toArray(new Long[0]));
     }
 }

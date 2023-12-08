@@ -2,7 +2,7 @@ package be.strykers.jour1;
 
 import be.strykers.utils.FileReader.BufferedReader;
 import be.strykers.utils.FileReader.FileReader;
-import be.strykers.utils.FileReader.Number;
+import be.strykers.utils.Number;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;

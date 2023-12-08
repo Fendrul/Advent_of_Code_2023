@@ -61,3 +61,11 @@ i
 9src/main/java/be/strykers/jour8/NodePathInformations.java,0\b\0b1db7f4550bfe8cb22a0fc5bfc1eda2c9787fc7
 _
 /src/main/java/be/strykers/utils/MathSolver.java,e\2\e22e4380abaa92eb6d0b892f05057a30b7d72495
+U
+%src/main/java/be/strykers/jour8/input,a\9\a99b462d383b9768030c7c84c3ba0f830dda3b2a
+f
+6src/main/java/be/strykers/utils/FileReader/Number.java,a\1\a1678763049462a93d1fa5a447be6edd3c86b5ba
+[
++src/main/java/be/strykers/utils/Number.java,3\5\359db8cb12fda38a6802bc1af4cc9f961a1629db
+[
++src/main/java/be/strykers/jour1/Solver.java,6\e\6e357dde96a35312e6dfdb481a5c76d9ff861d57

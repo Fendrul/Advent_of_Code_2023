@@ -12,6 +12,10 @@ public class DirectionMap implements Cyclerable<Character> {
         this.directions = directions.toCharArray();
     }
 
+    public int getSize() {
+        return directions.length;
+    }
+
     @Override
     public String toString() {
         return "Direction{" +
