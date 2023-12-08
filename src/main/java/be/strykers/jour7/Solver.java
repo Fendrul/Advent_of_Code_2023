@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class Solver {
 
     public static void main(String[] args) throws Exception {
-        LoggerBuilder.setConfig(Solver.class, "src/main/java/be/strykers/jour7/logs.txt", Level.FINE);
+        LoggerBuilder.setConfig(Solver.class, "src/main/java/be/strykers/jour7/logs.txt", Level.OFF);
         Logger LOGGER = LoggerBuilder.getLogger();
 
         long startTime = System.currentTimeMillis();
@@ -43,6 +43,7 @@ public class Solver {
              */
 
             System.out.println("solution to first part : " + handsManager.getFirstPartSolution());
+            System.out.println("Solution for second part : " + handsManager.getSecondPartSolution());
 
             System.out.println("Total execution time : " + (System.currentTimeMillis() - startTime) + "ms");
 
