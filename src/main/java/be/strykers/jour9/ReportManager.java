@@ -1,6 +1,7 @@
 package be.strykers.jour9;
 
 import be.strykers.utils.Logger.LoggerBuilder;
+import org.javatuples.Pair;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,16 +17,19 @@ public class ReportManager {
         reports.add(report);
     }
 
-    public long findFirstPart() {
-        long sum = 0;
+    public Pair<Long, Long> findParts() {
+        Pair<Long, Long> sums = Pair.with(0L, 0L);
         int counter = 0;
 
 
         for (Report report : reports) {
             LOGGER.fine("Starting report " + counter++);
-            sum += report.getNextValuePredicted();
+            Pair<Integer, Integer> sumsToAdd = report.getNextValuePredicted();
+
+            sums = Pair.with(sums.getValue0() + sumsToAdd.getValue0(), sums.getValue1() + sumsToAdd.getValue1());
+            LOGGER.fine("");
         }
 
-        return sum;
+        return sums;
     }
 }

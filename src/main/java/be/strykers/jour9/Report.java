@@ -3,6 +3,7 @@ package be.strykers.jour9;
 import be.strykers.utils.Logger.LoggerBuilder;
 import lombok.Builder;
 import lombok.Getter;
+import org.javatuples.Pair;
 
 import java.util.Arrays;
 import java.util.logging.Logger;
@@ -21,14 +22,22 @@ public class Report {
         this.numbers = numbers;
     }
 
-    public int getNextValuePredicted() {
+    public Pair<Integer, Integer> getNextValuePredicted() {
         return reduceArray(numbers);
     }
 
-    private int reduceArray(int[] array) {
-        if (containsAllZeroes(array)) return 0;
-
-        LOGGER.fine("Reducing array: " + Arrays.toString(array));
+    /**
+     * Reduces an array of integers by subtracting each element from its next element.
+     * If the array only contains zeroes, the result will be a pair (0, 0).
+     * Otherwise, it recursively reduces the array until it only contains one element.
+     * The final pair returned is the difference between the first element of the original array and the reduced array,
+     * and the sum of the last element of the original array and the reduced array.
+     *
+     * @param array the array of integers to be reduced
+     * @return a pair with the reduced values
+     */
+    private Pair<Integer, Integer> reduceArray(int[] array) {
+        if (containsAllZeroes(array)) return Pair.with(0, 0);
 
         int arrayLength = array.length;
         int[] newArrayOfNumbers = new int[arrayLength - 1];
@@ -37,9 +46,16 @@ public class Report {
             newArrayOfNumbers[i] = array[i + 1] - array[i];
         }
 
-        int reducedArray = reduceArray(newArrayOfNumbers);
+        Pair<Integer, Integer> reducedArray = reduceArray(newArrayOfNumbers);
 
-        return reducedArray + array[arrayLength - 1];
+        Pair<Integer, Integer> result = Pair.with(
+                array[0] - reducedArray.getValue0(),
+                array[arrayLength - 1] + reducedArray.getValue1()
+        );
+
+        LOGGER.finer("For array " + Arrays.toString(array) + "\nThe result is " + result.toString() + " and the reduced array is " + Arrays.toString(newArrayOfNumbers) + "\n");
+
+        return result;
     }
 
     private boolean containsAllZeroes(int[] array) {
