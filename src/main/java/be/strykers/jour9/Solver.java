@@ -35,6 +35,7 @@ public class Solver {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
         Pair<Long, Long> results = reportManager.findParts();
 
         System.out.println("Part 1: " + results.getValue1());
