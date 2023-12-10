@@ -12,7 +12,9 @@ public interface Cyclerator<T> {
      *
      * @return the next element in the cycle
      */
-    public T cycle();
+    public T getNext();
+
+    public T getPrevious();
 
     /**
      * Returns the current index of the element in the cycle.

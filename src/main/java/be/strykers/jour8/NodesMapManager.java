@@ -32,7 +32,7 @@ public class NodesMapManager {
         Node currentNode = startingNode;
 
         while (currentNode != terminatingNode) {
-            Character direction = directionCyclerator.cycle();
+            Character direction = directionCyclerator.getNext();
 
             if (direction == 'L') {
                 currentNode = currentNode.getLeft();
@@ -65,7 +65,7 @@ public class NodesMapManager {
 
         Character direction;
         while (count + 1 % directionLength != 0 && !multipleTerminatingNodes.contains(currentNode)) {
-            direction = directionCyclerator.cycle();
+            direction = directionCyclerator.getNext();
 
             if (direction == 'L') {
                 currentNode = currentNode.getLeft();

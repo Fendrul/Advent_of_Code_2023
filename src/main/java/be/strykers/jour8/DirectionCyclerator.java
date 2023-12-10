@@ -13,13 +13,18 @@ public class DirectionCyclerator implements Cyclerator<Character> {
     }
 
     @Override
-    public Character cycle() {
+    public Character getNext() {
         if (index == size) index = 0;
 
         char charToReturn = directions[index];
         index++;
 
         return charToReturn;
+    }
+
+    @Override
+    public Character getPrevious() {
+        return null;
     }
 
     @Override

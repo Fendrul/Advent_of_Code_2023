@@ -6,13 +6,11 @@ import be.strykers.utils.Logger.LoggerBuilder;
 import org.javatuples.Pair;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 public class Solver {
 
     public static void main(String[] args) {
         LoggerBuilder.setConfig(Solver.class, "src/main/java/be/strykers/jour9/logs.txt");
-        Logger LOGGER = LoggerBuilder.getLogger();
 
         long startTime = System.currentTimeMillis();
 
